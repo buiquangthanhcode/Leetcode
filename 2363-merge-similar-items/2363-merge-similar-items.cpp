@@ -2,8 +2,11 @@ class Solution {
 public:
 vector<vector<int>> mergeSimilarItems(vector<vector<int>>& items1, vector<vector<int>>& items2)
 {
+    int size_1=items1.size();
+    int size_2=items2.size();
         for(auto x:items2)
             items1.push_back(x);
+        map<int ,int >m ; 
         vector<vector<int>>vt;
         vector<int>temp;
         sort(items1.begin(),items1.end());
