@@ -1,55 +1,36 @@
 class Solution {
 public:
-      string intToRoman(int num)
-{
-    map<int,string> m ; 
-    m[1]="I";
-    m[5]="V";
-    m[10]="X";
-    m[50]="L";
-    m[100]="C";
-    m[500]="D";
-    m[1000]="M";
-    m[4]="IV";
-    m[40]="XL";
-    m[90]="XC";
-    m[400]="CD";
-    m[900]="CM";
-               m[9]="IX";
-    
-    // int sum=0;
-    // int t=num;
-    // int count=1;
-    // while(t!=0)
-    // {
-    //    int value=(t%10)*count;
+    string intToRoman(int num) {
+        vector<pair<string,int>>mp;
 
-    //     count*=10;
-    //     t=t/10;
-    // }
-    //  int value ; 
-    // vector<int>vt;
-    // cout<<endl;
-    int value =0; 
-    int sum=0;
-    string s="";
-    while(num>0 )
-    {
+        mp.push_back(make_pair("M",1000));
+        mp.push_back(make_pair("CM",900));
+        mp.push_back(make_pair("D",500));
+        mp.push_back(make_pair("CD",400));
+        mp.push_back(make_pair("C",100));
+        mp.push_back(make_pair("XC",90));
+        mp.push_back(make_pair("L",50));
+        mp.push_back(make_pair("XL",40));
+        mp.push_back(make_pair("X",10));
+        mp.push_back(make_pair("IX",9));
+        mp.push_back(make_pair("V",5));
+        mp.push_back(make_pair("IV",4));
+        mp.push_back(make_pair("I",1));
         
-        for(int i=num;i>=1;i--)
+        string res = "";
+        for(auto i:mp)
+        {
+            int n = num/i.second;
+            if (n > 0)
             {
-                auto it=m.find(i);
-                if(it!=m.end())
+                while(n--)
                 {
-                  value=it->first;
-                //   vt.push_back(it->first);
-                break;
+                    res += i.first;
                 }
+                num = num%i.second;
             }
-            num=num-value;
-            s+=m[value];
-            
+        }
+        
+        return res;
     }
-    return s; 
-}
 };
